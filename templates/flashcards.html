@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Flashcards | StudySpark{% endblock %}
+{% block content %}
+<section class="page-title">
+    <p class="eyebrow">REVISE AT YOUR OWN PACE</p>
+    <h1>Flashcard corner 🗂️</h1>
+    <p class="muted">Think of the answer, then flip the card to check yourself.</p>
+</section>
+
+<div class="flashcard-layout">
+    <section class="panel study-panel">
+        <div class="flashcard" id="flashcard" tabindex="0" role="button" aria-label="Flip flashcard">
+            <p class="eyebrow" id="card-subject">FLASHCARD</p>
+            <h2 id="card-text">Loading cards...</h2>
+            <p class="flip-hint">Click the card to reveal the other side</p>
+        </div>
+        <div class="card-controls">
+            <button class="button button-light" id="previous-card" type="button">← Previous</button>
+            <span id="card-counter">0 / 0</span>
+            <button class="button" id="next-card" type="button">Next →</button>
+        </div>
+        <p id="cards-empty" class="muted hidden">No flashcards available.</p>
+    </section>
+
+    <section class="panel add-card-panel">
+        <p class="eyebrow">MAKE YOUR OWN</p>
+        <h2>Add a flashcard</h2>
+        <form id="add-card-form">
+            <label>Subject</label>
+            <input id="new-subject" placeholder="e.g. Physics" required>
+            <label>Question / Front</label>
+            <textarea id="new-front" rows="3" placeholder="Write a question..." required></textarea>
+            <label>Answer / Back</label>
+            <textarea id="new-back" rows="3" placeholder="Write the answer..." required></textarea>
+            <button class="button full-width" type="submit">Add flashcard</button>
+        </form>
+        <p id="card-message" class="muted"></p>
+    </section>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/flashcards.js') }}"></script>
+{% endblock %}

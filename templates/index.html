@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Home | StudySpark{% endblock %}
+{% block content %}
+<section class="hero">
+    <div>
+        <p class="eyebrow">YOUR FRIENDLY STUDY SPACE</p>
+        <h1>Learn smarter.<br><span>Remember longer.</span></h1>
+        <p class="hero-copy">Practice with quick quizzes and revise important concepts using simple flashcards.</p>
+        {% if session.get('user_id') %}
+            <a class="button" href="{{ url_for('dashboard') }}">Go to dashboard</a>
+        {% else %}
+            <a class="button" href="{{ url_for('register') }}">Get started</a>
+            <a class="button button-light" href="{{ url_for('login') }}">Login</a>
+        {% endif %}
+    </div>
+    <div class="hero-art">
+        <div class="floating-card card-one">🧠<br><b>Learn</b></div>
+        <div class="floating-card card-two">✍️<br><b>Practice</b></div>
+        <div class="floating-card card-three">⭐<br><b>Improve</b></div>
+        <div class="big-orb">📚</div>
+    </div>
+</section>
+
+<section class="section-heading">
+    <p class="eyebrow">START PRACTISING</p>
+    <h2>Available quizzes</h2>
+</section>
+<div class="grid">
+    {% for quiz in quizzes %}
+    <article class="panel quiz-card">
+        <div class="icon-box">📝</div>
+        <p class="tag">{{ quiz.subject }}</p>
+        <h3>{{ quiz.title }}</h3>
+        <p class="muted">{{ quiz.description }}</p>
+        {% if session.get('user_id') %}
+            <a class="text-link" href="{{ url_for('quiz_page', quiz_id=quiz.id) }}">Start quiz →</a>
+        {% else %}
+            <a class="text-link" href="{{ url_for('login') }}">Login to start →</a>
+        {% endif %}
+    </article>
+    {% else %}
+    <p>No quizzes have been added yet.</p>
+    {% endfor %}
+    <article class="panel quiz-card">
+        <div class="icon-box">🗂️</div>
+        <p class="tag">REVISION</p>
+        <h3>Flashcards</h3>
+        <p class="muted">Use question-and-answer cards to revise concepts.</p>
+        <a class="text-link" href="{{ url_for('flashcards_page') if session.get('user_id') else url_for('login') }}">Open flashcards →</a>
+    </article>
+</div>
+{% endblock %}

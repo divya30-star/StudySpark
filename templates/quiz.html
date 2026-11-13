@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{{ quiz.title }} | StudySpark{% endblock %}
+{% block content %}
+<section class="page-title">
+    <p class="eyebrow">{{ quiz.subject }}</p>
+    <h1>{{ quiz.title }}</h1>
+    <p class="muted">Choose one answer for each question, then submit your quiz.</p>
+</section>
+<div id="quiz-app" data-quiz-id="{{ quiz.id }}">
+    <div class="panel">
+        <div class="loading" id="quiz-loading">Loading questions...</div>
+        <form id="quiz-form" class="hidden">
+            <div id="questions-container"></div>
+            <button class="button" type="submit">Submit quiz</button>
+        </form>
+        <div id="quiz-error" class="error-text"></div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/quiz.js') }}"></script>
+{% endblock %}

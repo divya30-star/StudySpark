@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | StudySpark{% endblock %}
+{% block content %}
+<section class="page-title">
+    <p class="eyebrow">YOUR LEARNING SPACE</p>
+    <h1>Welcome, {{ session.get('username') }} 👋</h1>
+    <p class="muted">A little progress every day adds up.</p>
+</section>
+<div class="stats-grid">
+    <div class="panel stat-card"><span>Quizzes attempted</span><strong>{{ summary.count }}</strong></div>
+    <div class="panel stat-card"><span>Average score</span><strong>{{ "%.1f"|format(summary.average) }}%</strong></div>
+</div>
+<div class="section-heading"><h2>Recent attempts</h2></div>
+<div class="panel table-panel">
+    {% if attempts %}
+    <table>
+        <thead><tr><th>Quiz</th><th>Score</th><th>Date</th></tr></thead>
+        <tbody>
+        {% for attempt in attempts %}
+            <tr>
+                <td>{{ attempt.title }}</td>
+                <td>{{ attempt.score }} / {{ attempt.total }}</td>
+                <td>{{ attempt.created_at }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p class="muted">You haven't attempted a quiz yet. Choose one from the <a href="{{ url_for('home') }}">home page</a>.</p>
+    {% endif %}
+</div>
+<div class="action-row">
+    <a class="button" href="{{ url_for('home') }}">Explore quizzes</a>
+    <a class="button button-light" href="{{ url_for('flashcards_page') }}">Study flashcards</a>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Quiz Result | StudySpark{% endblock %}
+{% block content %}
+<div class="result-wrap">
+    <div class="panel result-card">
+        <div class="result-icon">🎉</div>
+        <p class="eyebrow">QUIZ COMPLETED</p>
+        <h1>Your result</h1>
+        <div id="result-score" class="result-score">-- / --</div>
+        <p id="result-percentage" class="muted">Your score will appear here.</p>
+        <a class="button" href="{{ url_for('dashboard') }}">View dashboard</a>
+        <a class="button button-light" href="{{ url_for('home') }}">Back to home</a>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/result.js') }}"></script>
+{% endblock %}

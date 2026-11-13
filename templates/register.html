@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Sign up | StudySpark{% endblock %}
+{% block content %}
+<div class="auth-wrap">
+    <form class="panel auth-card" method="POST">
+        <p class="eyebrow">CREATE YOUR ACCOUNT</p>
+        <h1>Join StudySpark</h1>
+        <label>Username</label>
+        <input name="username" minlength="3" required placeholder="Choose a username">
+        <label>Password</label>
+        <input name="password" type="password" minlength="6" required placeholder="At least 6 characters">
+        <button class="button full-width" type="submit">Create account</button>
+        <p class="muted center">Already registered? <a href="{{ url_for('login') }}">Login</a></p>
+    </form>
+</div>
+{% endblock %}
